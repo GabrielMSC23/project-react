@@ -1,54 +1,56 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ReactDOM from "react-dom";
 import api from "../services/Api";
 
 
 
-async function PostLogin(name, password) {
-
-  const form = {name, password}
-  console.log('deu certo', form);
+export async function Register(name, email, password) {
+  
+  const form = {name, email, password}
+  console.log(form);
 
   try {
     // Faça a requisição para a API usando Axios
-    const response = await api.get('/login', form);
-    console.log(response); 
-    if( ! response.status == 200 ){
-      
-    }
-   
-    
+    const response = await api.post('/register', form);
+    console.log(response, 'cadastrado!');
+    window.location='/home'
 
   } catch (error) {
-    console.error('Erro ao fazer login', error);
+    console.error('Erro ao registrar:', error);
   }
 }
 
-const Login = (props) => {
+const Registra = (props) => {
   
   const [name, setname] = useState("");
+  const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
-
 
   const handleChange = e => {
     e.preventDefault();
-    PostLogin(name, password);
+    Register(name, email, password);
     
   };
 
   return(
     <Container>
       <Content>
-          <Title>Log in</Title>
+          <Title>Cadastro</Title>
           <Wrapper>
-            <Form>
+            <Form >
               <Input
-                placeholder="Usuario"
-                type="username"
-                name="username"
+                placeholder="Nome"
+                type="name"
+                name="name"
                 value={name}
                 onChange={(e) => [setname(e.target.value)]}
+              />
+              <Input
+                placeholder="E-mail"
+                type="email"
+                name="email"
+                value={email}
+                onChange={(e) => [setemail(e.target.value)]}
               />
               <Input 
                 placeholder="Senha"
@@ -57,8 +59,7 @@ const Login = (props) => {
                 value={password}
                 onChange={(e) => [setPassword(e.target.value)]}
               />
-              <Button onClick={handleChange}>Entrar</Button>
-              <Registrar href="/signup">Registre-se</Registrar>
+              <Button onClick={handleChange}>Registrar</Button>
             </Form> 
           </Wrapper>
         <BgImage />
@@ -67,11 +68,6 @@ const Login = (props) => {
   );
 };
 
-const Registrar = styled.a`
-  color: rgb(30 27 21);
-  font-size: 18px;
-  margin-top: 5%;
-`;
 
 const Wrapper = styled.section`
   display: flex;
@@ -113,7 +109,7 @@ const Button = styled.button`
   max-width: 100%;
   padding: 19px 72px;
   color: rgb(253, 249, 243);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   background: #0063e5;
   border: none;
@@ -128,8 +124,7 @@ const Button = styled.button`
 const Title = styled.h2`
   margin-top: 20%;
   margin-bottom: -9%;
-  font-size: 60px;
-  //font-weight: normal;
+  font-weight: normal;
   color: #2a2a29;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -195,4 +190,4 @@ const SignUp = styled.a`
   }
 `;
 
-export default Login;
+export default Registra;

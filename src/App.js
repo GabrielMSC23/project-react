@@ -1,7 +1,12 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./components/Login";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./components/Login.js";
 import Header from "./components/Header.js";
+import Home from "./components/Home.js";
 import './App.css';
+import SignUp from "./components/Signup.js";
+import Pacotes from "./components/pacotes.js";
+
 
 
 
@@ -11,8 +16,11 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path='/' element={<Login />}>
-          </Route>
+          <Route exact path='/' element={<Login />}></Route>
+          <Route path='/home' element={<Home />}></Route>
+          <Route path='/login' element={<Login />}></Route>
+          <Route path='/signup' element={<SignUp />}></Route>
+          <Route path='/pacotes' element={<Pacotes />}></Route>
         </Routes>
      </Router>
     </div>
