@@ -1,43 +1,10 @@
 import styled from "styled-components";
 import { useState } from "react";
-import api from "../services/Api";
 
 
 
 
 const Header = (props) => {
-
-	const [isLogged, setIsLogged] = useState(true);
-	const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-
-	async function postLogin (){
-		const form = {name, password}
-  	console.log(form);
-
-  try {
-    // Faça a requisição para a API usando Axios
-    const response = await api.post('/login', form);
-    console.log(response); 
-    if( response.data.status == 200 ){
-			setIsLogged(true);
-    }
-  } catch (error) {
-    console.error('Erro ao fazer login', error);
-  }
-	}
-
-	const handleLogin = (e) => {
-    e.preventDefault();
-    postLogin();
-  };
-
-  const handleLogout = () => {
-    // Lógica de logout aqui
-    // Atualize o estado isLogged para false
-    setIsLogged(false);
-  };
-
 
     return(
 			<Nav>
@@ -57,38 +24,6 @@ const Header = (props) => {
 						<span>PACOTES</span>
 					</a>	
 				</NavMenu>
-				{isLogged? (
-				<Bla>
-					<Butons>Perfil</Butons>
-					<Butons>Logout</Butons>
-				</Bla>) : 
-				(
-					<Login>
-          {/* Se não estiver logado, exibe o formulário de login */}
-          <div className="popup">
-            <div className="popup-inner">
-              <Form onSubmit={handleLogin}>
-                  <Input
-                    type="text"
-                    value={name}
-										placeholder="Ususário"
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                  <Input
-                    type="password"
-                    value={password}
-										placeholder="Senha"
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-									<Logout onClick={handleLogin}>Login</Logout>
-									<Logout href="/signup">Registre-se</Logout>	
-              </Form>
-            </div>
-          </div>
-        </Login>
-      )}
-					
-
 			</Nav>
 		); 
 }
@@ -191,10 +126,6 @@ const NavMenu = styled.div`
 	}*/
 `;
 
-const Bla = styled.div`
-	max-width: 300px;
-`;
-
 const Login = styled.a`
 	align-items: center;
 	display: flex;
@@ -205,7 +136,7 @@ const Login = styled.a`
 	margin: 0px;
 	padding: 0px;
 	position: relative;
-	margin-right: 0;
+	margin-right: auto;
 	margin-left: 25px; 
 
 	bottom{
@@ -214,7 +145,8 @@ const Login = styled.a`
 
 	a{
 		display: inline;
-	
+		align-items: center;
+		padding: 0 12px;
 
 		&:hover{
 		background-color: #f9f9f9;
@@ -224,15 +156,12 @@ const Login = styled.a`
 	}
 	
 `;
-const Form = styled.form`
-		display: inline;
-	a{
-		margin-top: -5px;
-	}
+const form = styled.form`
+	margin-right: -50px;
 `;
 
 const Input = styled.input`
-    width: calc(50% - 169px);
+    max-width: 50%;
     padding: 8px 13px;
 		margin-right: 10px;
     background: #f9f9fa;
@@ -244,53 +173,6 @@ const Input = styled.input`
     transition: all 0.3s ease-out;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
   
-`;
-
-const Butons = styled.a`
-		background-color: #001d39;
-		margin-right: 5px;
-    padding: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    border: 1px solid #f9f9f9;
-    border-radius: 4px;
-    transition: all 0.2s ease 0s;
-    height: 35px;
-    width: 88px;
-    text-align: center;
-    font-weight: bolder;
-
-	&:hover{
-		background-color: #f9f9f9;
-		color: #000;
-		border-color: transparent;
-	}
-`;
-
-const Lock = styled.div`
-
-	margin-right: -50px;
-`;
-
-const Logout = styled.a`
-		background-color: #001d39;
-		margin-right: 5px;
-    padding: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    border: 1px solid #f9f9f9;
-    border-radius: 4px;
-    transition: all 0.2s ease 0s;
-    height: 35px;
-    width: 88px;
-    text-align: center;
-    font-weight: bolder;
-
-	&:hover{
-		background-color: #f9f9f9;
-		color: #000;
-		border-color: transparent;
-	}
 `;
 
 export default Header

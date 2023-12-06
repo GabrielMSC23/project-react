@@ -15,7 +15,7 @@ const Home = (props) => {
     <Container>
       <Content>
         <Cards>
-
+          
         </Cards>
         <BgImage />
       </Content>
