@@ -12,8 +12,12 @@ export async function Register(name, email, password) {
   try {
     // Faça a requisição para a API usando Axios
     const response = await api.post('/register', form);
-    console.log(response, 'cadastrado!');
-    window.location='/home'
+    console.log(response);
+    if(response.data.status == 200){
+      console.log(response.data.status);
+      window.location='/login'
+    }
+    
 
   } catch (error) {
     console.error('Erro ao registrar:', error);

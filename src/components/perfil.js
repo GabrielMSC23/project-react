@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React, { useState } from "react";
 
 
-const Home = (props) => {
+const Profile = (props) => {
   
   /*const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -108,4 +108,4 @@ const Description = styled.p`
 
 `;
 
-export default Home;
+export default Profile;

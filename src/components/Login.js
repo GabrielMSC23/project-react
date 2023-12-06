@@ -15,7 +15,7 @@ async function PostLogin(name, password) {
     const response = await api.get('/login', form);
     console.log(response); 
     if( ! response.status == 200 ){
-      
+      window.location('')
     }
    
     
